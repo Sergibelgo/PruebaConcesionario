@@ -1,3 +1,4 @@
+Imports System.EnterpriseServices
 Imports System.Web.Optimization
 Imports System.Web.Security
 Imports System.Web.SessionState

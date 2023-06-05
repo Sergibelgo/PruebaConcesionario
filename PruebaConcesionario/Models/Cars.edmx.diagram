@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f3ea2e26b89a41ef97da14c84f3b59c6" Name="Diagram1">
+        <EntityTypeShape EntityType="ConcesionarioModel.cars" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ConcesionarioModel.enum_fuel" Width="1.5" PointX="4.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="ConcesionarioModel.enum_gearbox" Width="1.5" PointX="4.5" PointY="3.875" IsExpanded="true" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

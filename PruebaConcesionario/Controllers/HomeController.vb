@@ -1,8 +1,11 @@
-﻿Public Class HomeController
-    Inherits System.Web.Mvc.Controller
+﻿
 
+Public Class HomeController
+    Inherits System.Web.Mvc.Controller
+    Private ReadOnly _db As New ConcesionarioEntities()
     Function Index() As ActionResult
-        Return View()
+        Dim prueba = _db.cars.ToList()
+        Return View(prueba)
     End Function
 
     Function About() As ActionResult

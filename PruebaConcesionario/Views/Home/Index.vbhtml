@@ -1,4 +1,5 @@
-﻿@Code
+﻿@ModelType IEnumerable(Of cars)
+@Code
     ViewData("Title") = "Home Page"
 End Code
 
@@ -8,26 +9,31 @@ End Code
         <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
         <p><a href="https://asp.net" class="btn btn-primary btn-md">Learn more &raquo;</a></p>
     </section>
+    <ul>
+        @For Each item In Model
+            @<li>@item.brand @item.model @item.price</li>
+        Next
+    </ul>
 
-    <div class="row">
-        <section class="col-md-4" aria-labelledby="gettingStartedTitle">
-            <h2 id="gettingStartedTitle">Getting started</h2>
+    <div Class="row">
+        <section Class="col-md-4" aria-labelledby="gettingStartedTitle">
+            <h2 id="gettingStartedTitle"> Getting started</h2>
             <p>
-                ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-                enables a clean separation of concerns and gives you full control over markup
-                for enjoyable, agile development.
+                ASP.NET MVC gives you a powerful, patterns-based way To build dynamic websites that
+                enables a clean separation Of concerns And gives you full control over markup
+                For enjoyable, agile development.
             </p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+            <p> <a Class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
         </section>
-        <section class="col-md-4" aria-labelledby="librariesTitle">
+        <section Class="col-md-4" aria-labelledby="librariesTitle">
             <h2 id="librariesTitle">Get more libraries</h2>
-            <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+            <p> NuGet Is a free Visual Studio extension that makes it easy To add, remove, And update libraries And tools In Visual Studio projects.</p>
+            <p> <a Class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
         </section>
-        <section class="col-md-4" aria-labelledby="hostingTitle">
-            <h2 id="hostingTitle">Web Hosting</h2>
-            <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+        <section Class="col-md-4" aria-labelledby="hostingTitle">
+            <h2 id="hostingTitle"> Web Hosting</h2>
+            <p> You can easily find a web hosting company that offers the right mix Of features And price For your applications.</p>
+            <p> <a Class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
         </section>
     </div>
 </main>
