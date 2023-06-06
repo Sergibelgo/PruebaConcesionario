@@ -1,9 +1,9 @@
 ﻿Imports System.Web.Mvc
 
 Namespace Controllers
-    Public Class carsController
+    Public Class CarsController
         Inherits Controller
-
+        Private ReadOnly _service As New CarsService()
         ' GET: cars
         Function Index() As ActionResult
             Return View()
@@ -15,7 +15,10 @@ Namespace Controllers
         End Function
 
         ' GET: cars/Create
-        Function Create() As ActionResult
+        Async Function Create() As Threading.Tasks.Task(Of ActionResult)
+            Dim enums = Await _service.GetEnums()
+            ViewData("Combustion") = enums.fuelEnum
+            ViewData("Marchas") = enums.gearEnum
             Return View()
         End Function
 
@@ -27,7 +30,7 @@ Namespace Controllers
 
                 Return RedirectToAction("Index")
             Catch
-                Return View()
+                Return View(collection)
             End Try
         End Function
 

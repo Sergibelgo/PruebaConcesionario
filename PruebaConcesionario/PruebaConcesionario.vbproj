@@ -272,9 +272,12 @@
     <Compile Include="App_Start\BundleConfig.vb" />
     <Compile Include="App_Start\FilterConfig.vb" />
     <Compile Include="App_Start\RouteConfig.vb" />
-    <Compile Include="Controllers\carsController.vb" />
+    <Compile Include="Controllers\CarsController.vb" />
     <Compile Include="Global.asax.vb">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\car.vb">
+      <DependentUpon>Cars.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Cars.Context.vb">
       <AutoGen>True</AutoGen>
@@ -286,14 +289,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Cars.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\cars.vb">
-      <DependentUpon>Cars.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Cars1.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Cars.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DTO%27s\EnumsDTO.vb" />
     <Compile Include="Models\enum_fuel.vb">
       <DependentUpon>Cars.tt</DependentUpon>
     </Compile>
@@ -316,6 +317,8 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="Controllers\HomeController.vb" />
+    <Compile Include="Services\Cars\CarsService.vb" />
+    <Compile Include="Services\Cars\ICarsService.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="My Project\Resources.resx">
@@ -404,6 +407,9 @@
     <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
+    <Content Include="Views\Shared\_MenuBar.vbhtml" />
+    <Content Include="Views\Cars\Create.vbhtml" />
+    <Content Include="Views\Cars\CardCar.vbhtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="favicon.ico" />
@@ -432,7 +438,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Cars\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

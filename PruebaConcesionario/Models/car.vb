@@ -10,10 +10,19 @@
 Imports System
 Imports System.Collections.Generic
 
-Partial Public Class enum_gearbox
+Partial Public Class car
     Public Property id As Integer
-    Public Property name As String
+    Public Property Marca As String
+    Public Property Modelo As String
+    Public Property Precio As Decimal
+    Public Property Motor As String
+    Public Property Año As Decimal
+    Public Property Kilometraje As Decimal
+    Public Property Combustion As Integer
+    Public Property Marchas As Integer
+    Public Property Localidad As String
 
-    Public Overridable Property cars As ICollection(Of car) = New HashSet(Of car)
+    Public Overridable Property enum_fuel As enum_fuel
+    Public Overridable Property enum_gearbox As enum_gearbox
 
 End Class

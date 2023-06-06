@@ -1,132 +1,170 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
   <!-- EF Runtime content -->
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="ConcesionarioModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'Concesionario.dbo.cars' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+      <Schema Namespace="ConcesionarioModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="cars">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="brand" Type="varchar" MaxLength="50" />
-          <Property Name="model" Type="varchar" MaxLength="50" />
-          <Property Name="price" Type="decimal" Precision="20" Scale="2" />
-          <Property Name="engine" Type="nvarchar" MaxLength="50" />
-          <Property Name="year" Type="numeric" Precision="4" Scale="0" />
-          <Property Name="mileage" Type="decimal" Precision="30" Scale="2" />
-          <Property Name="fuel" Type="int" />
-          <Property Name="gearbox" Type="int" />
-          <Property Name="location" Type="nvarchar" MaxLength="50" />
+          <Property Name="brand" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="model" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="price" Type="decimal" Precision="20" Scale="2" Nullable="false" />
+          <Property Name="engine" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="year" Type="numeric" Precision="4" Scale="0" Nullable="false" />
+          <Property Name="mileage" Type="decimal" Precision="30" Scale="2" Nullable="false" />
+          <Property Name="fuel" Type="int" Nullable="false" />
+          <Property Name="gearbox" Type="int" Nullable="false" />
+          <Property Name="location" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'Concesionario.dbo.enum_fuel' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="enum_fuel">
           <Key>
             <PropertyRef Name="id" />
-            <PropertyRef Name="name" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'Concesionario.dbo.enum_gearbox' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="enum_gearbox">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="name" Type="nvarchar" MaxLength="50" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <Association Name="FK_cars_enum_fuel">
+          <End Role="enum_fuel" Type="Self.enum_fuel" Multiplicity="1" />
+          <End Role="cars" Type="Self.cars" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="enum_fuel">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="cars">
+              <PropertyRef Name="fuel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_cars_enum_gearbox">
+          <End Role="enum_gearbox" Type="Self.enum_gearbox" Multiplicity="1" />
+          <End Role="cars" Type="Self.cars" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="enum_gearbox">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="cars">
+              <PropertyRef Name="gearbox" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="ConcesionarioModelStoreContainer">
-          <EntitySet Name="cars" EntityType="Self.cars" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-[cars].[id] AS [id], 
-[cars].[brand] AS [brand], 
-[cars].[model] AS [model], 
-[cars].[price] AS [price], 
-[cars].[engine] AS [engine], 
-[cars].[year] AS [year], 
-[cars].[mileage] AS [mileage], 
-[cars].[fuel] AS [fuel], 
-[cars].[gearbox] AS [gearbox], 
-[cars].[location] AS [location]
-FROM [dbo].[cars] AS [cars]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="enum_fuel" EntityType="Self.enum_fuel" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-[enum_fuel].[id] AS [id], 
-[enum_fuel].[name] AS [name]
-FROM [dbo].[enum_fuel] AS [enum_fuel]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="enum_gearbox" EntityType="Self.enum_gearbox" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-[enum_gearbox].[id] AS [id], 
-[enum_gearbox].[name] AS [name]
-FROM [dbo].[enum_gearbox] AS [enum_gearbox]</DefiningQuery>
-          </EntitySet>
+          <EntitySet Name="cars" EntityType="Self.cars" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="enum_fuel" EntityType="Self.enum_fuel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="enum_gearbox" EntityType="Self.enum_gearbox" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_cars_enum_fuel" Association="Self.FK_cars_enum_fuel">
+            <End Role="enum_fuel" EntitySet="enum_fuel" />
+            <End Role="cars" EntitySet="cars" />
+          </AssociationSet>
+          <AssociationSet Name="FK_cars_enum_gearbox" Association="Self.FK_cars_enum_gearbox">
+            <End Role="enum_gearbox" EntitySet="enum_gearbox" />
+            <End Role="cars" EntitySet="cars" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="ConcesionarioModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
-        <EntityType Name="cars">
+      <Schema Namespace="ConcesionarioModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="car">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="brand" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="model" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="price" Type="Decimal" Precision="20" Scale="2" />
-          <Property Name="engine" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="year" Type="Decimal" Precision="4" Scale="0" />
-          <Property Name="mileage" Type="Decimal" Precision="30" Scale="2" />
-          <Property Name="fuel" Type="Int32" />
-          <Property Name="gearbox" Type="Int32" />
-          <Property Name="location" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Marca" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Modelo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Precio" Type="Decimal" Precision="20" Scale="2" Nullable="false" />
+          <Property Name="Motor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Año" Type="Decimal" Precision="4" Scale="0" Nullable="false" />
+          <Property Name="Kilometraje" Type="Decimal" Precision="30" Scale="2" Nullable="false" />
+          <Property Name="Combustion" Type="Int32" Nullable="false" />
+          <Property Name="Marchas" Type="Int32" Nullable="false" />
+          <Property Name="Localidad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="enum_fuel" Relationship="Self.FK_cars_enum_fuel" FromRole="cars" ToRole="enum_fuel" />
+          <NavigationProperty Name="enum_gearbox" Relationship="Self.FK_cars_enum_gearbox" FromRole="cars" ToRole="enum_gearbox" />
         </EntityType>
         <EntityType Name="enum_fuel">
           <Key>
             <PropertyRef Name="id" />
-            <PropertyRef Name="name" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="cars" Relationship="Self.FK_cars_enum_fuel" FromRole="enum_fuel" ToRole="cars" />
         </EntityType>
         <EntityType Name="enum_gearbox">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="cars" Relationship="Self.FK_cars_enum_gearbox" FromRole="enum_gearbox" ToRole="cars" />
         </EntityType>
+        <Association Name="FK_cars_enum_fuel">
+          <End Role="enum_fuel" Type="Self.enum_fuel" Multiplicity="1" />
+          <End Role="cars" Type="ConcesionarioModel.car" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="enum_fuel">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="cars">
+              <PropertyRef Name="Combustion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_cars_enum_gearbox">
+          <End Role="enum_gearbox" Type="Self.enum_gearbox" Multiplicity="1" />
+          <End Role="cars" Type="ConcesionarioModel.car" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="enum_gearbox">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="cars">
+              <PropertyRef Name="Marchas" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="ConcesionarioEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="cars" EntityType="Self.cars" />
+          <EntitySet Name="cars" EntityType="ConcesionarioModel.car" />
           <EntitySet Name="enum_fuel" EntityType="Self.enum_fuel" />
           <EntitySet Name="enum_gearbox" EntityType="Self.enum_gearbox" />
+          <AssociationSet Name="FK_cars_enum_fuel" Association="Self.FK_cars_enum_fuel">
+            <End Role="enum_fuel" EntitySet="enum_fuel" />
+            <End Role="cars" EntitySet="cars" />
+          </AssociationSet>
+          <AssociationSet Name="FK_cars_enum_gearbox" Association="Self.FK_cars_enum_gearbox">
+            <End Role="enum_gearbox" EntitySet="enum_gearbox" />
+            <End Role="cars" EntitySet="cars" />
+          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
-      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="ConcesionarioModelStoreContainer" CdmEntityContainer="ConcesionarioEntities">
           <EntitySetMapping Name="cars">
-            <EntityTypeMapping TypeName="ConcesionarioModel.cars">
+            <EntityTypeMapping TypeName="ConcesionarioModel.car">
               <MappingFragment StoreEntitySet="cars">
                 <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="brand" ColumnName="brand" />
-                <ScalarProperty Name="model" ColumnName="model" />
-                <ScalarProperty Name="price" ColumnName="price" />
-                <ScalarProperty Name="engine" ColumnName="engine" />
-                <ScalarProperty Name="year" ColumnName="year" />
-                <ScalarProperty Name="mileage" ColumnName="mileage" />
-                <ScalarProperty Name="fuel" ColumnName="fuel" />
-                <ScalarProperty Name="gearbox" ColumnName="gearbox" />
-                <ScalarProperty Name="location" ColumnName="location" />
+                <ScalarProperty Name="Marca" ColumnName="brand" />
+                <ScalarProperty Name="Modelo" ColumnName="model" />
+                <ScalarProperty Name="Precio" ColumnName="price" />
+                <ScalarProperty Name="Motor" ColumnName="engine" />
+                <ScalarProperty Name="Año" ColumnName="year" />
+                <ScalarProperty Name="Kilometraje" ColumnName="mileage" />
+                <ScalarProperty Name="Combustion" ColumnName="fuel" />
+                <ScalarProperty Name="Marchas" ColumnName="gearbox" />
+                <ScalarProperty Name="Localidad" ColumnName="location" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -151,7 +189,7 @@ FROM [dbo].[enum_gearbox] AS [enum_gearbox]</DefiningQuery>
     </edmx:Mappings>
   </edmx:Runtime>
   <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
-  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <Connection>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
@@ -162,7 +200,7 @@ FROM [dbo].[enum_gearbox] AS [enum_gearbox]</DefiningQuery>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
-        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
       </DesignerInfoPropertySet>
     </Options>
