@@ -3,13 +3,13 @@
     ViewData("Title") = "Create"
 End Code
 
-<h2>Add new car</h2>
+<h2>Añadir un coche nuevo</h2>
 
 @Using (Html.BeginForm()) 
     @Html.AntiForgeryToken()
     
     @<div class="form-horizontal">
-        <h4>car</h4>
+        <h4>Información</h4>
         <hr />
         @Html.ValidationSummary(True, "", New With { .class = "text-danger" })
         <div class="form-group">
