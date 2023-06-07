@@ -1,4 +1,5 @@
-﻿Imports System.Web.Mvc
+﻿Imports System.Threading.Tasks
+Imports System.Web.Mvc
 
 Namespace Controllers
     Public Class CarsController
@@ -24,11 +25,20 @@ Namespace Controllers
 
         ' POST: cars/Create
         <HttpPost()>
-        Function Create(ByVal collection As FormCollection) As ActionResult
+        <ValidateAntiForgeryToken>
+        Async Function CreateAsync(ByVal collection As FormCollection) As Task(Of ActionResult)
             Try
                 ' TODO: Add insert logic here
+                If ModelState.IsValid Then
+                    Dim car = New car With {
+                        .Marca = collection("Marca")
+                    }
+                    Await _service.CreateCarAsync(car)
+                    Return RedirectToAction("Index", "Home")
+                End If
 
-                Return RedirectToAction("Index")
+
+                Return View(collection)
             Catch
                 Return View(collection)
             End Try

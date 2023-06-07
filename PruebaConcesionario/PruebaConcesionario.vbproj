@@ -409,7 +409,7 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
     <Content Include="Views\Shared\_MenuBar.vbhtml" />
     <Content Include="Views\Cars\Create.vbhtml" />
-    <Content Include="Views\Cars\CardCar.vbhtml" />
+    <Content Include="Views\Shared\_CardCar.vbhtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="favicon.ico" />

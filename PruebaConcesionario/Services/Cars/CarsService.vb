@@ -4,9 +4,10 @@ Public Class CarsService
     Implements ICarsService
     Private ReadOnly _db As New ConcesionarioEntities()
 
-    Public Sub CreateCar(car As car) Implements ICarsService.CreateCar
-        Throw New NotImplementedException()
-    End Sub
+    Public Async Function CreateCarAsync(car As car) As Threading.Tasks.Task Implements ICarsService.CreateCarAsync
+        _db.cars.Add(car)
+        Await _db.SaveChangesAsync()
+    End Function
 
     Public Sub DeleteCar(id As Integer) Implements ICarsService.DeleteCar
         Throw New NotImplementedException()

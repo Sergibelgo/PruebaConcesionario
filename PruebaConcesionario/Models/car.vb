@@ -9,9 +9,11 @@
 
 Imports System
 Imports System.Collections.Generic
+Imports System.ComponentModel.DataAnnotations
 
 Partial Public Class car
     Public Property id As Integer
+    <Required>
     Public Property Marca As String
     Public Property Modelo As String
     Public Property Precio As Decimal

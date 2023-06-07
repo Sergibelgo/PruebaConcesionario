@@ -5,10 +5,8 @@ End Code
 
 <main>
     <section class="row">
-        <ul>
-            @For Each item In Model
-                @<li>@item.Modelo @item.Marca @item.Precio</li>
-            Next
-        </ul>
+        @For Each item In Model
+            @<article>@Html.Partial("_CardCar", item)</article>
+        Next
     </section>
 </main>
